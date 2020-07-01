@@ -14,6 +14,7 @@ class BooksController < ApplicationController
 
 	def create
 		@book = Book.new(book_params)
+		@book.user_id = current_user.id
   	if @book.save #入力されたデータをdbに保存する。
   		redirect_to book_path(@book), notice: "successfully created book!"#保存された場合の移動先を指定。
   	else
@@ -40,7 +41,7 @@ class BooksController < ApplicationController
   	end
   end
 
-  def delete
+  def destoy
   	@book = Book.find(params[:id])
   	@book.destoy
   	redirect_to books_path, notice: "successfully delete book!"
